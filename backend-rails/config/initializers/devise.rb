@@ -14,7 +14,7 @@ Devise.setup do |config|
   # confirmation, reset password and unlock tokens in the database.
   # Devise will use the `secret_key_base` as its `secret_key`
   # by default. You can change it below and use your own secret key.
-  # config.secret_key = '85a38b08723713d56b053f4891e3918dc9297b2b7c4dd55a61ad09a8783d9ab119179079058cb05bdc09d0e4188d91321acc0f93c0be90ca82f437c14e238df4'
+  # config.secret_key = 'dd7c5ab3346f9fd685d73c0607344a0b8d0d05f1e5748ef89b00be71c968bcc45de49a3afe7942d1f2d7088b7817e8f1c975a54e4c8619b6149cf48307243e3d'
 
   # ==> Controller configuration
   # Configure the parent class to the devise controllers.
@@ -126,7 +126,7 @@ Devise.setup do |config|
   config.stretches = Rails.env.test? ? 1 : 12
 
   # Set up a pepper to generate the hashed password.
-  # config.pepper = '970ed6681419c404e4f00d3c5be67cc421c2b8c3abe6327fc5773ccf5160423c494f2b170ff10ba64a630d398cee4b63e1b74c6c722fd2d125f00ed67df13e56'
+  # config.pepper = '9ab12558d635b54bab5f7014f21f86b8d29069aeb96c6f9c8f038311c8a50dce942c3f6014630d950e6627e40d3006c3e417eea47e587a4bb6b920912a848548'
 
   # Send a notification to the original email when the user's email is changed.
   # config.send_email_changed_notification = false
@@ -256,13 +256,16 @@ Devise.setup do |config|
 
   # ==> Navigation configuration
   # Lists the formats that should be treated as navigational. Formats like
-  # :html should redirect to the sign in page when the user does not have
+  # :html, should redirect to the sign in page when the user does not have
   # access, but formats like :xml or :json, should return 401.
   #
   # If you have any extra navigational formats, like :iphone or :mobile, you
   # should add them to the navigational formats lists.
   #
   # The "*/*" below is required to match Internet Explorer requests.
+  # config.navigational_formats = ['*/*', :html]
+
+  #prevent devise from using flash messages which are not present in Rails api mode.
   config.navigational_formats = []
 
   # The default HTTP method used to sign out a resource. Default is :delete.
@@ -296,18 +299,32 @@ Devise.setup do |config|
   # so you need to do it manually. For the users scope, it would be:
   # config.omniauth_path_prefix = '/my_engine/users/auth'
 
-  # ==> Hotwire/Turbo configuration
-  # When using Devise with Hotwire/Turbo, the http status for error responses
-  # and some redirects must match the following. The default in Devise for existing
-  # apps is `200 OK` and `302 Found` respectively, but new apps are generated with
-  # these new defaults that match Hotwire/Turbo behavior.
-  # Note: These might become the new default in future versions of Devise.
-  config.responder.error_status = :unprocessable_entity
-  config.responder.redirect_status = :see_other
+  # ==> Turbolinks configuration
+  # If your app is using Turbolinks, Turbolinks::Controller needs to be included to make redirection work correctly:
+  #
+  # ActiveSupport.on_load(:devise_failure_app) do
+  #   include Turbolinks::Controller
+  # end
 
   # ==> Configuration for :registerable
 
   # When set to false, does not sign a user in automatically after their password is
   # changed. Defaults to true, so a user is signed in automatically after changing a password.
   # config.sign_in_after_change_password = true
+
+  config.jwt do |jwt|
+    jwt.secret = ENV['DEVISE_JWT_SECRET_KEY']
+    # jwt.secret = Rails.application.credentials.devise_jwt_secret_key!
+    jwt.dispatch_requests = [
+      ['POST', %r{^/login$}],
+      # ['POST', %r{^/signup}]
+    ]
+    jwt.revocation_requests = [
+      ['DELETE', %r{^/logout$}]
+    ]
+    # jwt.expiration_time = 1.day.to_i
+    jwt.expiration_time = 5.minutes.to_i
+  end
+
+
 end
