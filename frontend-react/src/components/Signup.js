@@ -44,13 +44,13 @@ const Signup=({setCurrUser, setShow})=>{
                 <input type="email" id="email" name="email" placeholder="Email" required />
             </div>
             <div className="form-group">
-                <label htmlFor="password">Password:</label>
-                <input type="password" id="password" name="password" placeholder="Password" required />
+                <label htmlFor="password">Senha:</label>
+                <input type="password" id="password" name="password" placeholder="Senha" required />
             </div>
-            <button type="submit" className="submit-button">Submit</button>
+            <button type="submit" className="submit-button">Criar Conta</button>
             </form>
             <div className="login-link">
-            Already registered? <a href="#login" onClick={handleClick}>Login</a> here.
+                <a href="#login" onClick={handleClick}>Login</a>
             </div>
         </div>
     )

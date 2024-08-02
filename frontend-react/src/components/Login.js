@@ -54,7 +54,7 @@ const Login = ({setCurrUser, setShow}) =>{
         </div>
       </form>
       <div className="signup-link">
-        <a href="#signup" onClick={handleClick}>Criar nova conta</a>
+        <a href="#signup" onClick={handleClick}>Criar Conta</a>
       </div>
     </div>
   )
