@@ -23,45 +23,40 @@ const SubmitCountry = ({ currUser }) => {
         setCountryData(response.data[0]); // Update state with the first item in the array
         setError(null); // Clear any previous error
       } catch (error) {
-        setError('Error submitting country: ' + error.message); // Update state with error message
+        setError('Erro: ' + error.message); // Update state with error message
         setCountryData(null); // Clear country data
       }
     } else {
-      alert('Please select a country.');
+      alert('Por favor selecione um país.');
     }
   };
 
   if (!currUser) return null;
 
   return (
-    <div>
-      <CountryDropdown
-        selectedCountry={selectedCountry}
-        setSelectedCountry={setSelectedCountry}
-      />
-      <button onClick={handleCountrySubmit}>Submit Country</button>
+    <div className="container-submit-country">
+      <div className="dropdown-container-submit">
+        <CountryDropdown
+          selectedCountry={selectedCountry}
+          setSelectedCountry={setSelectedCountry}
+        />
+        <button className="submit-button" onClick={handleCountrySubmit}>Buscar</button>
+      </div>
 
       {countryData && (
-        <div>
-          <h3>Country Details:</h3>
-          <p><strong>Name:</strong> {countryData.name.common}</p>
-          <p><strong>Official Name:</strong> {countryData.name.official}</p>
+        <div className="country-details">
+          <h3>Informações do País:</h3>
+          <p><strong>Nome:</strong> {countryData.name.common}</p>
+          <p><strong>Nome Oficial:</strong> {countryData.name.official}</p>
           <p><strong>Capital:</strong> {countryData.capital.join(', ')}</p>
-          <p><strong>Population:</strong> {countryData.population.toLocaleString()}</p>
-          <p><strong>Region:</strong> {countryData.region}</p>
-          <p><strong>Subregion:</strong> {countryData.subregion}</p>
-          <p><strong>Languages:</strong> {Object.values(countryData.languages).join(', ')}</p>
-          <p><strong>Currencies:</strong> {Object.values(countryData.currencies).map(curr => `${curr.name} (${curr.symbol})`).join(', ')}</p>
-          <p><strong>Flag:</strong> <img src={countryData.flags.png} alt={`Flag of ${countryData.name.common}`} width="100" /></p>
-          <p><strong>Coat of Arms:</strong> <img src={countryData.coatOfArms.png} alt={`Coat of Arms of ${countryData.name.common}`} width="100" /></p>
-          <p><strong>Google Maps:</strong> <a href={countryData.maps.googleMaps} target="_blank" rel="noopener noreferrer">View on Google Maps</a></p>
-        </div>
-      )}
-
-      {error && (
-        <div style={{ color: 'red' }}>
-          <h3>Error:</h3>
-          <pre>{error}</pre> {/* Display error message */}
+          <p><strong>População:</strong> {countryData.population.toLocaleString()}</p>
+          <p><strong>Região:</strong> {countryData.region}</p>
+          <p><strong>Continente:</strong> {countryData.subregion}</p>
+          <p><strong>Línguas:</strong> {Object.values(countryData.languages).join(', ')}</p>
+          <p><strong>Moeda:</strong> {Object.values(countryData.currencies).map(curr => `${curr.name} (${curr.symbol})`).join(', ')}</p>
+          <p><strong>Bandeira:</strong> <img src={countryData.flags.png} alt={`Flag of ${countryData.name.common}`} className="flag" /></p>
+          <p><strong>Bandeira de Guerra:</strong> <img src={countryData.coatOfArms.png} alt={`Coat of Arms of ${countryData.name.common}`} className="coat-of-arms" /></p>
+          <p><strong>Localização:</strong> <a href={countryData.maps.googleMaps} target="_blank" rel="noopener noreferrer">Veja no Google Maps</a></p>
         </div>
       )}
     </div>

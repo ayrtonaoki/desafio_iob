@@ -37,17 +37,22 @@ const Signup=({setCurrUser, setShow})=>{
         setShow(true)
     }
     return(
-        <div>
-        <form ref={formRef} onSubmit={handleSubmit}>
-            Email: <input type="email" name='email' placeholder="email" />
-            <br/>
-            Password: <input type="password" name='password' placeholder="password" />
-            <br/>
-            <input type='submit' value="Submit" />
-        </form>
-        <br />
-        <div>Already registered, <a href="#login" onClick={handleClick} >Login</a> here.</div>
-    </div>
+        <div className="signup-container">
+            <form ref={formRef} onSubmit={handleSubmit} className="signup-form">
+            <div className="form-group">
+                <label htmlFor="email">Email:</label>
+                <input type="email" id="email" name="email" placeholder="Email" required />
+            </div>
+            <div className="form-group">
+                <label htmlFor="password">Password:</label>
+                <input type="password" id="password" name="password" placeholder="Password" required />
+            </div>
+            <button type="submit" className="submit-button">Submit</button>
+            </form>
+            <div className="login-link">
+            Already registered? <a href="#login" onClick={handleClick}>Login</a> here.
+            </div>
+        </div>
     )
 }
 export default Signup

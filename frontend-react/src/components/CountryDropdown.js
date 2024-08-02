@@ -14,15 +14,16 @@ const CountryDropdown = ({ selectedCountry, setSelectedCountry }) => {
   ];
 
   return (
-    <div>
-      <label htmlFor="country">Select a Country:</label>
+    <div className="dropdown-container">
+      <label htmlFor="country" className="dropdown-label">Selecione um país:</label>
       <select
         id="country"
         name="country"
         value={selectedCountry}
         onChange={(e) => setSelectedCountry(e.target.value)}
+        className="dropdown-select"
       >
-        <option value="">--Select a country--</option>
+        <option value="">--Selecione um país--</option>
         {countries.map((country, index) => (
           <option key={index} value={country}>
             {country}
