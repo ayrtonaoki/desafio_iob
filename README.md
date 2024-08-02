@@ -1,5 +1,4 @@
 # Desafio IOB
-## Descrição
 Projeto conheça o país
 - Mostrar informações sobre o país escolhido
 
