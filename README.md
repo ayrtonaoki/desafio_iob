@@ -9,7 +9,9 @@ Requisitos:
 
 ## Tecnologias
 - Ruby 2.6.1
-- Rails API
+- Rails
+- Node
+- NPM
 - React 18.3.1
 
 ## Getting Started
