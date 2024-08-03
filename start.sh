@@ -3,6 +3,7 @@ PORT=3001 cd frontend-react && npm install && npm start &
 
 echo "Creating Devise JWT Secret Key..."
 cd ./backend-rails
+bundle
 SECRET=$(bundle exec rake secret)
 echo "DEVISE_JWT_SECRET_KEY=$SECRET" > .env
 
