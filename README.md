@@ -7,6 +7,11 @@ Requisitos:
 - Integrar back e front com APIs
 - Autenticação do usuário para entrar no sistema
 
+## Tecnologias
+- Ruby 2.6.1
+- Rails API
+- React 18.3.1
+
 ## Getting Started
 - Clonar o repositório
 - Acessar o diretório: `cd desafio_iob`
