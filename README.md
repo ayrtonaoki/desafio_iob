@@ -13,7 +13,7 @@ Requisitos:
 - React 18.3.1
 
 ## Getting Started
-- Clonar o repositório
+- Clonar o repositório `git clone git@github.com:ayrtonaoki/desafio_iob.git`
 - Acessar o diretório: `cd desafio_iob`
 - Definir permissão de execução para o arquivo start.sh: `sudo chmod +x start.sh`
 - Executar `./start.sh`
